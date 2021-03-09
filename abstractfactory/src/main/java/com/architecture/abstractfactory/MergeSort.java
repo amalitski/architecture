@@ -1,0 +1,28 @@
+package com.architecture.abstractfactory;
+
+class MergeSort implements SortInterface {
+    private final int[] array;
+
+    public MergeSort(int[] array) {
+        this.array = array;
+    }
+
+    public int[] sort() {
+        for (int left = 0; left < array.length; left++) {
+            int minInd = left;
+            for (int i = left; i < array.length; i++) {
+                if (array[i] < array[minInd]) {
+                    minInd = i;
+                }
+            }
+            swap(array, left, minInd);
+        }
+        return array;
+    }
+
+    private void swap(int[] array, int ind1, int ind2) {
+        int tmp = array[ind1];
+        array[ind1] = array[ind2];
+        array[ind2] = tmp;
+    }
+}

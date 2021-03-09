@@ -1,0 +1,29 @@
+package com.architecture.abstractfactory;
+
+class InsertionSort implements SortInterface {
+    private final int[] array;
+
+    public InsertionSort(int[] array) {
+        this.array = array;
+    }
+    public int[] sort(){
+        for (int left = 0; left < array.length; left++) {
+            int value = array[left];
+            int i = left - 1;
+            for (; i >= 0; i--) {
+                if (value < array[i]) {
+                    array[i + 1] = array[i];
+                } else {
+                    break;
+                }
+            }
+            array[i + 1] = value;
+        }
+        return array;
+    }
+    private void swap(int[] array, int ind1, int ind2) {
+        int tmp = array[ind1];
+        array[ind1] = array[ind2];
+        array[ind2] = tmp;
+    }
+}
