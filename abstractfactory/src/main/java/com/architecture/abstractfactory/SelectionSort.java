@@ -9,7 +9,6 @@ class SelectionSort implements SortInterface {
         this.array = array;
     }
     public int[] sort(){
-        System.out.println(Arrays.toString(array));
         for (int left = 0; left < array.length; left++) {
             int minInd = left;
             for (int i = left; i < array.length; i++) {

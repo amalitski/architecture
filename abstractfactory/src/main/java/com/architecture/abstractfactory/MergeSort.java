@@ -1,5 +1,7 @@
 package com.architecture.abstractfactory;
 
+import java.util.Arrays;
+
 class MergeSort implements SortInterface {
     private final int[] array;
 
@@ -8,21 +10,46 @@ class MergeSort implements SortInterface {
     }
 
     public int[] sort() {
-        for (int left = 0; left < array.length; left++) {
-            int minInd = left;
-            for (int i = left; i < array.length; i++) {
-                if (array[i] < array[minInd]) {
-                    minInd = i;
-                }
-            }
-            swap(array, left, minInd);
-        }
-        return array;
+        return sort(array);
     }
 
-    private void swap(int[] array, int ind1, int ind2) {
-        int tmp = array[ind1];
-        array[ind1] = array[ind2];
-        array[ind2] = tmp;
+    private static int[] sort(int[] items) {
+        if (items.length < 2) {
+            return items;
+        } else {
+            int[] left = sort(Arrays.copyOfRange(items, 0, items.length / 2));
+            int[] right = sort(Arrays.copyOfRange(items, items.length / 2, items.length));
+            return merge(left, right);
+        }
+    }
+
+    private static int[] merge(int[] left, int[] right) {
+        int i = 0, j = 0, k = 0;
+        int[] result = new int[left.length + right.length];
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                result[k] = left[i];
+                i++;
+            } else {
+                result[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+        if (i == left.length) {
+            while (j < right.length) {
+                result[k] = right[j];
+                j++;
+                k++;
+            }
+        }
+        if (j == right.length) {
+            while (i < left.length) {
+                result[k] = left[i];
+                i++;
+                k++;
+            }
+        }
+        return result;
     }
 }
