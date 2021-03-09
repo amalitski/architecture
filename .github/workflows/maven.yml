@@ -21,5 +21,9 @@ jobs:
       with:
         java-version: '14.0.2'
         architecture: x64
-    - name: Build with Maven
+    - name: Test Maxrix
+      run: cd matrix && mvn -B package --file pom.xml
+    - name: Test Solid
+      run: cd solid && mvn -B package --file pom.xml
+    - name: Test AbstractFactory
       run: cd abstractfactory && mvn -B package --file pom.xml
