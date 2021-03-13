@@ -52,4 +52,4 @@ jobs:
           java-version: '14.0.2'
           architecture: x64
       - name: Test Adaptor
-        run: cd adaptor && mvn -B package --file pom.xml
+        run: cd adapter && mvn -B package --file pom.xml

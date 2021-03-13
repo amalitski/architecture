@@ -19,6 +19,7 @@ public class ApplicationTwo implements ApplicationInterface {
         var matrixA = generateMatrix();
         var matrixB = generateMatrix();
         this.adaptor.setMatrix(matrixA, matrixB);
+        this.adaptor.run();
     }
 
     private int[][] generateMatrix() {
