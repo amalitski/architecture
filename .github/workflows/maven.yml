@@ -19,7 +19,7 @@ jobs:
           java-version: '14.0.2'
           architecture: x64
       - name: Test Solid
-        run: cd solid && mvn -B package --file pom.xml
+        run: cd solid && mvn -B clean test --file pom.xml
   matrix:
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
           java-version: '14.0.2'
           architecture: x64
       - name: Test Maxrix
-        run: cd matrix && mvn -B package --file pom.xml
+        run: cd matrix && mvn -B clean test --file pom.xml
   abstractfactory:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
           java-version: '14.0.2'
           architecture: x64
       - name: Test AbstractFactory
-        run: cd abstractfactory && mvn -B package --file pom.xml
+        run: cd abstractfactory && mvn -B clean test --file pom.xml
   adaptor:
     runs-on: ubuntu-latest
     steps:
@@ -52,4 +52,15 @@ jobs:
           java-version: '14.0.2'
           architecture: x64
       - name: Test Adaptor
-        run: cd adapter && mvn -B package --file pom.xml
+        run: cd adapter && mvn -B clean test --file pom.xml
+  template:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 14
+        uses: actions/setup-java@v1
+        with:
+          java-version: '14.0.2'
+          architecture: x64
+      - name: Test Adaptor
+        run: cd template && mvn -B clean test --file pom.xml
