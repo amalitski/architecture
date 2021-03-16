@@ -1,0 +1,4 @@
+file.xml
+file.csv
+file.json
+file.txt
