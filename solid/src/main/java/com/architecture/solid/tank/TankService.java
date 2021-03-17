@@ -1,45 +1,50 @@
 package com.architecture.solid.tank;
 
-
-/**
- * axis: y
- * |
- * |
- * |___
- * axis: x
- */
 public class TankService implements TankServiceInterface {
-    private final Tank tank;
+    private final Position position;
 
-    public TankService(Tank tank) {
-        this.tank = tank;
+    public TankService() {
+        position = new Position();
     }
 
-    public Tank up() {
-        int y = tank.getY() + 1;
-        tank.setY(y);
-        tank.setDirection(Direction.UP);
-        return tank;
+    /**
+     * Прямо
+     */
+    public void direct() {
+        var r = position.getRadius();
+        if (position.getAzimuth() == 180) {
+            r = r - 1;
+        } else {
+            r = r + 1;
+        }
+        position.setRadius(r);
     }
 
-    public Tank down() {
-        int y = tank.getY() - 1;
-        tank.setY(y);
-        tank.setDirection(Direction.DOWN);
-        return tank;
+    /**
+     * По часовой
+     */
+    public void clockwise() {
+        var a = changeAzimuth(+90);
+        position.setAzimuth(a);
     }
 
-    public Tank left() {
-        int x = tank.getX() - 1;
-        tank.setX(x);
-        tank.setDirection(Direction.LEFT);
-        return tank;
+    /**
+     * Против часовой
+     */
+    public void counterClockwise() {
+        var a = changeAzimuth(-90);
+        position.setAzimuth(a);
     }
 
-    public Tank right() {
-        int x = tank.getX() + 1;
-        tank.setX(x);
-        tank.setDirection(Direction.RIGHT);
-        return tank;
+    private int changeAzimuth(int delta) {
+        var a = position.getAzimuth() + delta;
+        if (a > 360) {
+            a = a - 360;
+        }
+        return a;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
