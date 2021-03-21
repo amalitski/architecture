@@ -1,21 +1,19 @@
 package com.architecture.solid;
 
-import com.architecture.solid.tank.TankService;
+import com.architecture.solid.tank.*;
+import java.util.List;
 
 public class App
 {
     public static void main( String[] args )
     {
-        var tService = new TankService();
+        var e = new Entity();
 
-        tService.direct();
-        tService.clockwise();
-        tService.clockwise();
-        tService.counterClockwise();;
+        new MoveCommand(new MovableAdaptor(e)).execute();
+        new RotateCommand(new RotableAdaptor(e)).execute();
 
-        var position = tService.getPosition();
-
-        System.out.println("Azimuth: " + position.getAzimuth());
-        System.out.println("Radius: " + position.getRadius());
+        for (var key: List.of("position", "direction", "angularVelocity", "velocity")) {
+            System.out.println(key + ": " + VectorHelper.str(IoC.resolve(key, e)));
+        }
     }
 }
